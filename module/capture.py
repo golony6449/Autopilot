@@ -1,5 +1,6 @@
 import pyautogui
 import numpy as np
+import cv2
 
 class Capture:
     def __init__(self):
@@ -7,4 +8,5 @@ class Capture:
 
     def export(self):
         image = pyautogui.screenshot()
-        return np.array(image)
+        output = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+        return output
