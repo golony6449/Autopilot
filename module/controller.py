@@ -12,3 +12,9 @@ class Controller:
         self.joy.data.wAxisX = angle
         self.joy.update()
 
+    def setDirectionPercent(self, anglePercent):
+        step = 0x8000 / 100
+        self.joy.data.wAxisX = step * anglePercent
+        self.joy.update()
+
+
