@@ -4,6 +4,7 @@ import numpy as np
 
 from module import controller
 from module import capture
+from module import imageProcess as IP
 
 ctl = controller.Controller()
 capture = capture.Capture()
@@ -12,11 +13,14 @@ capture = capture.Capture()
 currentTIme = time.time()
 while True:
     img = capture.export()
+    img = IP.roi(img)
+    # img = cv2.blur(img, (3, 3))
+
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    edges = cv2.Canny(gray, 100, 200)
+    edges = cv2.Canny(gray, 50, 100)
 
     angle = np.pi / 180
-    lines = cv2.HoughLines(edges, 5, angle * 3, 1000)
+    lines = cv2.HoughLines(edges, 5, angle * 3, 750)
 
     edges = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
 
